@@ -1,0 +1,20 @@
+pipeline {
+  agent any
+  options {
+    ansiColor('css')
+    timestamps()
+   }
+  stages {
+    stage('Deploy to Elastic Beanstalk') {
+      steps {
+        withAWS(credentials: 'AWS-credential') {
+          sh 'eb init --region us-west-2'
+          sh 'eb create my-env'
+          sh 'eb deploy my-env'
+        }
+      }
+    }
+  }
+}
+
+
