@@ -1,0 +1,6 @@
+version: "3"
+services:
+  web:
+    image: ghcr.io/edugoma/hello-2048
+    ports:
+      - "80:80"
