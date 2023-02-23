@@ -4,17 +4,15 @@ pipeline {
     ansiColor('css')
     timestamps()
    }
-  stages {
-    stage('Deploy to Elastic Beanstalk') {
-      steps {
-        withAWS(credentials: 'AWS-credential') {
-          sh 'eb init --region us-west-2'
-          sh 'eb create my-env'
-          sh 'eb deploy my-env'
-        }
+   stage('Deploy to Elastic Beanstalk') {
+    steps {
+      withAWS(credentials: 'AWS-credential', region: 'eu-west-1') {
+        dir('./elasticfolder') {
+          sh 'eb deploy hello-eb2 --environment hello-eb2-dev'
+        }   
       }
     }
-  }
+  }  
 }
 
 
